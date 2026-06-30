@@ -7,5 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Address extends Model
 {
-    use HasFactory;
+    protected $table = 'address'; 
+    // 1 address thuộc 1 user
+    public function user() {
+        return $this->belongsTo(User::class, 'userId');
+    }
 }
