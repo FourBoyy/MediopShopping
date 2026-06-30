@@ -2,23 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use Illuminate\Http\Request;
+use App\Models\Role;
+
 
 class HomeController extends Controller
 {
-    //
-    public function index () {
-        $users = User::all(); 
 
+public function index () {
+  $role = Role::where('name', 'admin')->get()[0];
+  $userArr  = []; 
+  foreach ($role->users as $user) {
+   $userArr[]  = [
+        'id'=>$user->id,
+        'name'=>$user->username,
+        'role'=>$role->name,
+        'email'=>$user->email
+    ]; 
+  }
 
-        return $users; 
-    }
-    public function show($id) {
-        $user = User::find($id); 
-        if (!$user) {
-            return response()->json(['message' => 'User not found'], 404);
-        }
-        return $user;
-    }
+  $userArr = (object) $userArr; 
+//   return $userArr; 
+
+  return view('home', compact('userArr')); 
+
+  
+}
+
 }
