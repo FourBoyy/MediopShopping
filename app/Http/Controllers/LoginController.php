@@ -17,7 +17,6 @@ class LoginController extends Controller {
         }
         return [$email, $password];  
     }
-
     
 
 

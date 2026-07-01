@@ -27,4 +27,4 @@ Route::post('/login', [LoginController::class, 'getInfo']);
 
 Route::get('/about', [HomeController::class, 'about']);
 
-
+Route::get('/dashboard', [HomeController::class, 'getname']);
