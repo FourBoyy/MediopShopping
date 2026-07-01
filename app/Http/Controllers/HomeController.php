@@ -9,6 +9,7 @@ class HomeController extends Controller
 {
 
 public function index () {
+    
   $role = Role::where('name', 'admin')->get()[0];
   $userArr  = []; 
   foreach ($role->users as $user) {
