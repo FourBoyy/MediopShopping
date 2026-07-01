@@ -21,6 +21,6 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        config(['auth.remember_me_lifetime' => 43200]); 
     }
 }
