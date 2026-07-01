@@ -30,7 +30,7 @@
                     Trải nghiệm mua sắm thông minh với các sản phẩm chất lượng. Đăng ký ngay hôm nay để nhận ưu đãi hấp dẫn dành riêng cho thành viên mới.
                 </p>
                 <div class="flex gap-4">
-                    <a href="#" class="bg-primary-dark text-white px-8 py-4 rounded-full font-bold hover:bg-teal-900 transition shadow-lg">Mua sắm ngay</a>
+                    <a href="#" class="bg-primary-dark text-[#18b2ab] px-8 py-4 rounded-full font-bold hover:bg-teal-900 hover:text-white transition shadow-lg">Mua sắm ngay</a>
                     <a href="#" class="border border-gray-300 px-8 py-4 rounded-full font-bold text-gray-700 hover:bg-gray-50 transition">Tìm hiểu thêm</a>
                 </div>
             </div>
