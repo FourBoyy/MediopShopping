@@ -37,7 +37,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
                     </div>
-                    <input type="text" name="login_id" id="login_id" value="{{ old('login_id') }}" 
+                    <input type="text" name="email" id="login_id" value="{{ old('login_id') }}" 
                         class="w-full pl-10 pr-4 py-3 bg-input border border-input rounded-xl text-primary-dark focus:outline-none focus:ring-2 focus:ring-[#18b2ab] placeholder-gray-500" 
                         placeholder="Email hoặc Số điện thoại" required autofocus>
                 </div>
