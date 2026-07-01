@@ -29,7 +29,8 @@ class UserFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'phonenumber' => '0123456789',
             'password' => static::$password ??= Hash::make('password'),
-            'roleId' => fake()->randomElement([1, 2])
+            'roleId' => fake()->randomElement([1, 2]),
+            'remembe_token'=> '123423344'
 
         ];
     }

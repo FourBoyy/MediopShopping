@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('email', 60); 
             $table->string('password', 80); 
             $table->string('phonenumber', 10);
+            $table->string('remember_token', 100); 
             $table->foreignId('roleId')->constrained('roles');  // thiết lập khóa ngoại
             $table->timestamps();
         });
