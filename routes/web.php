@@ -14,8 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// route đăng nhập
+// GET /login
 Route::get("/login", [LoginController::class, 'index'])->name('login'); 
-// route đăng ký
+// GET /register
 Route::get('/register', [RegisterController::class, 'index'])->name('register'); 
+//POST /login
+Route::post('/login', [LoginController::class, 'getInfo']); 
+
 

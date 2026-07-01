@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class User extends Model
 {
+    use HasFactory; 
     protected $table = 'users'; 
     
     // 1 user thuộc về 1 role
