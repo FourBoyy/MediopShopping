@@ -5,6 +5,8 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProductController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,8 +33,20 @@ Route::group(['prefix' => ''], function () {
     // Login
     Route::get("/login", [LoginController::class, 'index'])->name('login');
     Route::post('/login', [LoginController::class, 'login']);
-    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });
+// Admin Routes
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::group(['prefix' => 'products'], function () {
+        Route::get('/list', [ProductController::class, 'productList'])->name('admin.products.list');
+        Route::get('/add', [ProductController::class, 'productAdd'])->name('admin.products.add');
+        Route::get('/detail', [ProductController::class, 'productDetail'])->name('admin.products.detail');
+        Route::get('/edit', [ProductController::class, 'productEdit'])->name('admin.products.edit');
+      
+    }); 
+});
+//404
+Route::fallback(function () {
+    return response()->view('errors.404', [], 404);
 });
