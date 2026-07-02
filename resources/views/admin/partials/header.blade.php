@@ -40,7 +40,8 @@
                                                     <li>
                                                         <a href="#">
                                                             <div class="message-img">
-                                                                <img src="{{ asset('assets/img/contact/1.jpg') }}" alt="">
+                                                                <img src="{{ asset('assets/img/contact/1.jpg') }}"
+                                                                    alt="">
                                                             </div>
                                                             <div class="message-content">
                                                                 <span class="message-date">16 Sept</span>
@@ -52,7 +53,8 @@
                                                     <li>
                                                         <a href="#">
                                                             <div class="message-img">
-                                                                <img src="{{ asset('assets/img/contact/4.jpg') }}" alt="">
+                                                                <img src="{{ asset('assets/img/contact/4.jpg') }}"
+                                                                    alt="">
                                                             </div>
                                                             <div class="message-content">
                                                                 <span class="message-date">16 Sept</span>
@@ -114,7 +116,7 @@
                                                 aria-expanded="false" class="nav-link dropdown-toggle">
                                                 <i class="icon nalika-user nalika-user-rounded header-riht-inf"
                                                     aria-hidden="true"></i>
-                                                <span class="admin-name">{{Auth::user()->username}}</span>
+                                                <span class="admin-name">{{ Auth::user()->username }}</span>
                                                 <i class="icon nalika-down-arrow nalika-angle-dw nalika-icon"></i>
                                             </a>
                                             <ul role="menu"
@@ -127,9 +129,16 @@
                                                             class="icon nalika-settings author-log-ic"></span>
                                                         Settings</a>
                                                 </li>
-                                                <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><span
-                                                            class="icon nalika-unlocked author-log-ic"></span> Log
-                                                        Out</a>
+                                                <li>
+                                                    <a href="{{ route('logout') }}"
+                                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                        <span class="icon nalika-unlocked author-log-ic"></span> Log Out
+                                                    </a>
+
+                                                    <form id="logout-form" action="{{ route('logout') }}"
+                                                        method="POST" style="display: none;">
+                                                        @csrf
+                                                    </form>
                                                 </li>
                                             </ul>
                                         </li>
@@ -180,7 +189,7 @@
                                         </li>
                                         <li><a href="data-maps.html">Data Maps</a>
                                         </li>
-                        
+
                                     </ul>
                                 </li>
                                 <li><a data-toggle="collapse" data-target="#Chartsmob" href="#">Charts <span
