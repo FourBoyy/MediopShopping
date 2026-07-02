@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 
@@ -33,9 +34,11 @@ class RegisterController extends Controller
             'username' => $request->name,
             'email' => $request->email,
             'phonenumber' => $request->phonenumber ?? null,
+            'remember_token'=>'usern213',
             'password' => Hash::make($request->password),
             'roleId' => 2,
         ]);
+        Auth::login($user); 
         return redirect()->route('login')->with('success', 'Đăng ký tài khoản thành công!');
     }
 }

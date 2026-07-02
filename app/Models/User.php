@@ -12,6 +12,7 @@ class User extends Authenticatable
     'username',
     'email',
     'phonenumber',
+    'remember_token',
     'password',
     'roleId'
 ];
