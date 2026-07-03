@@ -39,6 +39,6 @@ class RegisterController extends Controller
             'roleId' => 2,
         ]);
         Auth::login($user); 
-        return redirect()->route('login')->with('success', 'Đăng ký tài khoản thành công!');
+        return redirect()->route('login')->with('success', 'Đăng ký tài khoản thành công! Vui lòng đăng nhập để tiếp tục.');
     }
 }

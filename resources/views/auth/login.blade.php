@@ -93,7 +93,13 @@
                         class="mt-2 flex items-center justify-center gap-2 text-red-500 text-xs font-semibold transition-all duration-500">
                         <span>{{ session('error') }}</span>
                     </div>
+                @elseif (session('success'))
+                    <div id="success-alert"
+                        class="mt-2 flex items-center justify-center gap-2 text-green-500 text-xs font-semibold transition-all duration-500">
+                        <span>{{ session('success') }}</span>
+                    </div>
                 @endif
+
             </div>
 
             <div class="flex items-center justify-end">
