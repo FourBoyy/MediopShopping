@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrderController;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,13 +50,14 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/add', [ProductController::class, 'productAdd'])->name('admin.products.add');
         Route::get('/detail', [ProductController::class, 'productDetail'])->name('admin.products.detail');
         Route::get('/edit', [ProductController::class, 'productEdit'])->name('admin.products.edit');
-      
+
     }); 
     // user
     Route::group(['prefix' => 'user'], function() {
         Route::get('/list', [UserController::class, 'userList'])->name('admin.user.list'); 
         Route::get('/add', [UserController::class, 'userAdd'])->name('admin.users.add'); 
         Route::get('/detail', [UserController::class, 'userDetail'])->name('admin.users.detail'); 
+        Route::post('/create', [UserController::class, 'create']); 
     }); 
     // order
     Route::group(['prefix' => 'order'], function() {

@@ -22,7 +22,7 @@
                         </div>
                     @endif
 
-                    <form action="/user/create" method="POST" enctype="multipart/form-data">
+                    <form action="admin/user/create" method="POST" enctype="multipart/form-data">
                         @csrf 
                         
                         <div class="form-group">
