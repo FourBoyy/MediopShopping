@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +56,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/list', [UserController::class, 'userList'])->name('admin.user.list'); 
         Route::get('/add', [UserController::class, 'userAdd'])->name('admin.users.add'); 
         Route::get('/detail', [UserController::class, 'userDetail'])->name('admin.users.detail'); 
+        Route::post('/create', [UserController::class, 'create']); 
     }); 
 
 
