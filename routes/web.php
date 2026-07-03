@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,6 +57,12 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/add', [UserController::class, 'userAdd'])->name('admin.users.add'); 
         Route::get('/detail', [UserController::class, 'userDetail'])->name('admin.users.detail'); 
     }); 
+    // order
+    Route::group(['prefix' => 'order'], function() {
+        Route::get('/list', [OrderController::class, 'orderList'])->name('admin.order.list');
+        Route::get('/detail/{id}', [OrderController::class, 'orderDetail'])->name('admin.order.detail');
+        Route::put('/admin/orders/{id}/update-status', [OrderController::class, 'updateStatus'])->name('admin.order.updateStatus');
+    });
 
 
 });
