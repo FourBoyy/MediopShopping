@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class OrderDetail extends Model
 {
+    use HasFactory;
    protected $table = 'order_details'; 
 
     // ... các thuộc tính khác như $fillable ...

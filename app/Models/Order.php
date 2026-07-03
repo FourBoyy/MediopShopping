@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
+   use HasFactory;
    protected $table = 'orders'; 
 
    // 1 order thuộc về 1 user
