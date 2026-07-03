@@ -4,15 +4,23 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
-class User extends Model
+use Illuminate\Foundation\Auth\User as Authenticatable;
+class User extends Authenticatable
 {
     use HasFactory; 
+    protected $fillable = [
+    'username',
+    'email',
+    'phonenumber',
+    'password',
+    'roleId'
+];
+
     protected $table = 'users'; 
     
     // 1 user thuộc về 1 role
     public function role () {
-        return $this->belongsto(Role::class, 'roleId'); 
+        return $this->belongsto(Role::class, 'roleId');     
     }
 
     // 1 user có nhiều address
@@ -30,11 +38,5 @@ class User extends Model
     public function reviews() {
         return $this->hasMany(Review::class, 'userId'); 
     }
-
-
-
-
-
-
     
 }

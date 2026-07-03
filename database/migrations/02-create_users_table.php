@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('username', 40); 
             $table->string("avatar", 100)->nullable(); 
-            $table->string('email', 60); 
+            $table->string('email', 60)->unique(); 
             $table->string('password', 80); 
             $table->string('phonenumber', 10);
-            $table->string('remember_token', 100); 
+            $table->rememberToken();
             $table->foreignId('roleId')->constrained('roles');  // thiết lập khóa ngoại
             $table->timestamps();
         });
