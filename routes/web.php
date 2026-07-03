@@ -6,6 +6,7 @@ use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,9 +36,13 @@ Route::group(['prefix' => ''], function () {
     Route::post('/login', [LoginController::class, 'login']);
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });
-// Admin Routes
+
+
+// Admin Routes (Private Route)
 Route::group(['prefix' => 'admin'], function () {
+    // dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    // products
     Route::group(['prefix' => 'products'], function () {
         Route::get('/list', [ProductController::class, 'productList'])->name('admin.products.list');
         Route::get('/add', [ProductController::class, 'productAdd'])->name('admin.products.add');
@@ -45,6 +50,14 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/edit', [ProductController::class, 'productEdit'])->name('admin.products.edit');
       
     }); 
+    // user
+    Route::group(['prefix' => 'user'], function() {
+        Route::get('/list', [UserController::class, 'userList'])->name('admin.user.list'); 
+        Route::get('/add', [UserController::class, 'userAdd'])->name('admin.users.add'); 
+        Route::get('/detail', [UserController::class, 'userDetail'])->name('admin.users.detail'); 
+    }); 
+
+
 });
 //404
 Route::fallback(function () {

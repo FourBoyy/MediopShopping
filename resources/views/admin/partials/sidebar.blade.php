@@ -35,7 +35,7 @@
                                 hàng</span></a>
                     </li>
                     <li>
-                        <a class="" href="mailbox.html" aria-expanded="false"><i
+                        <a class="" href="{{route('admin.user.list')}}" aria-expanded="false"><i
                                 class="icon nalika-pie-chart icon-wrap"></i> <span class="mini-click-non">Quản lí khách
                                 hàng</span></a>
                     </li>
