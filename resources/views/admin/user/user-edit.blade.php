@@ -10,12 +10,12 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="product-status-wrap">
                     <h4 style="color: white;">Chỉnh sửa người dùng: {{ $user->username }}</h4>
-       @if (session('success'))
+                    @if (session('success'))
                     <div class="alert alert-success alert-dismissible" role="alert">
                         {{ session('success') }}
                     </div>
                     @endif
-                    
+
                     {{-- Hiển thị lỗi validate --}}
                     @if ($errors->any())
                     <div class="alert alert-danger">
@@ -47,9 +47,9 @@
                             <label style="color: white;">Vai trò</label>
                             <select name="roleId" class="form-control" required>
                                 @foreach($roles as $role)
-                                    <option value="{{ $role->id }}" {{ (old('roleId', $user->roleId) == $role->id) ? 'selected' : '' }}>
-                                        {{ $role->name }}
-                                    </option>
+                                <option value="{{ $role->id }}" {{ (old('roleId', $user->roleId) == $role->id) ? 'selected' : '' }}>
+                                    {{ $role->name }}
+                                </option>
                                 @endforeach
                             </select>
                         </div>
