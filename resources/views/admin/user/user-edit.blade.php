@@ -10,7 +10,12 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="product-status-wrap">
                     <h4 style="color: white;">Chỉnh sửa người dùng: {{ $user->username }}</h4>
-
+       @if (session('success'))
+                    <div class="alert alert-success alert-dismissible" role="alert">
+                        {{ session('success') }}
+                    </div>
+                    @endif
+                    
                     {{-- Hiển thị lỗi validate --}}
                     @if ($errors->any())
                     <div class="alert alert-danger">

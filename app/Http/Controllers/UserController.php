@@ -24,15 +24,17 @@ class UserController extends Controller
 
     protected function userDetail($id)
     {
-   
+
         $user = User::find($id);
         return view('admin.user.user-detail', compact('user'));
     }
 
 
-    public function userEdit($id) {
-        $user = User::find($id); 
-        return view('admin.user.user-edit', compact('user')); 
+    public function userEdit($id)
+    {
+        $user = User::find($id);
+        $roles = Role::all();
+        return view('admin.user.user-edit', compact(['user', 'roles']));
     }
     public function create(Request $request)
     {
@@ -44,6 +46,7 @@ class UserController extends Controller
         ]);
 
         $data = $request->only(['username', 'email', 'phonenumber', 'roleId']);
+
         $data['password'] = Hash::make($request->password);
 
         // Gọi hàm storeAvatar nếu có file
@@ -54,6 +57,35 @@ class UserController extends Controller
         User::create($data);
 
         return redirect()->back()->with('success', 'Thêm người dùng thành công!');
+    }
+
+    public function update(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        $request->validate([
+            'username' => 'required|max:40',
+            'email'    => 'required|email|unique:users,email,' . $id, // Bỏ qua email của chính user này khi check unique
+            'password' => 'nullable|min:6', // Cho phép để trống (không đổi mật khẩu)
+            'avatar'   => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        // Lấy các dữ liệu cơ bản
+        $data = $request->only(['username', 'email', 'phonenumber', 'roleId']);
+
+        // Chỉ cập nhật mật khẩu nếu người dùng nhập vào
+        if ($request->filled('password')) {
+            $data['password'] = Hash::make($request->password);
+        }
+
+        // Xử lý upload avatar mới nếu có
+        if ($request->hasFile('avatar')) {
+            $data['avatar'] = $this->storeAvatar($request->file('avatar'));
+        }
+
+        $user->update($data);
+
+        return redirect()->back()->with('success', 'Cập nhật thông tin thành công!');
     }
 
     protected function storeAvatar($file)

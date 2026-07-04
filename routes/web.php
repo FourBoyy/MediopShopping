@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
@@ -48,8 +49,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin.role']], func
         Route::get('/add', [UserController::class, 'userAdd'])->name('admin.users.add');
         Route::get('/detail/{id}', [UserController::class, 'userDetail'])->name('admin.users.detail');
         Route::post('/create', [UserController::class, 'create']);
-        Route::get('/edit/{id}', [UserController::class, 'userEdit'])->name('admin.user.update'); 
-        Route::post('/update/{id}', [UserController::class, 'create'])->name('admin.user.up'); 
+        Route::get('/edit/{id}', [UserController::class, 'userEdit'])->name('admin.user.edit');
+        Route::put('admin/user/update/{id}', [UserController::class, 'update'])->name('admin.user.update');
     });
     // order
     Route::group(['prefix' => 'order'], function () {
