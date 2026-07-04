@@ -41,7 +41,8 @@ Route::group(['prefix' => ''], function () {
 
 
 // Admin Routes (Private Route)
-Route::group(['prefix' => 'admin'], function () {
+
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin.role']], function () {
     // dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     // products
