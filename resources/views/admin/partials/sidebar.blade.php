@@ -30,7 +30,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a class="" href="mailbox.html" aria-expanded="false"><i
+                        <a class="" href="{{ route('admin.order.list') }}" aria-expanded="false"><i
                                 class="icon nalika-diamond icon-wrap"></i> <span class="mini-click-non">Quản lí đơn
                                 hàng</span></a>
                     </li>

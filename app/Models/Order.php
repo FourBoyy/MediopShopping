@@ -20,8 +20,6 @@ class Order extends Model
    public function orderDetails() {
     return $this->hasMany(OrderDetail::class, 'orderId', 'id'); 
    }
-   
-
 // nhiều order có nhiều product 
    public function products() {
    return $this->belongsToMany(Product::class, 'order_details', 'orderId', 'productId'); 

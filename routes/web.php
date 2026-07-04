@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\OrderController;
 use App\Models\User;
 
 /*
@@ -49,7 +50,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/add', [ProductController::class, 'productAdd'])->name('admin.products.add');
         Route::get('/detail', [ProductController::class, 'productDetail'])->name('admin.products.detail');
         Route::get('/edit', [ProductController::class, 'productEdit'])->name('admin.products.edit');
-      
+
     }); 
     // user
     Route::group(['prefix' => 'user'], function() {
@@ -58,6 +59,12 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/detail', [UserController::class, 'userDetail'])->name('admin.users.detail'); 
         Route::post('/create', [UserController::class, 'create']); 
     }); 
+    // order
+    Route::group(['prefix' => 'order'], function() {
+        Route::get('/list', [OrderController::class, 'orderList'])->name('admin.order.list');
+        Route::get('/detail/{id}', [OrderController::class, 'orderDetail'])->name('admin.order.detail');
+        Route::put('/admin/orders/{id}/update-status', [OrderController::class, 'updateStatus'])->name('admin.order.updateStatus');
+    });
 
 
 });
