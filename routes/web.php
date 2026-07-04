@@ -1,5 +1,4 @@
 <?php
-
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
@@ -8,8 +7,6 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrderController;
-use App\Models\User;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,12 +19,8 @@ use App\Models\User;
 */
 //GET /
 Route::get('/', [HomeController::class, 'index'])->name('home');
-
 //GET /about
-
 Route::get('/about', [HomeController::class, 'about']);
-
-
 Route::group(['prefix' => ''], function () {
     // Register
     Route::get('/register', [RegisterController::class, 'index'])->name('register');
@@ -38,10 +31,7 @@ Route::group(['prefix' => ''], function () {
     Route::post('/login', [LoginController::class, 'login']);
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });
-
-
 // Admin Routes (Private Route)
-
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin.role']], function () {
     // dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -51,23 +41,22 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin.role']], func
         Route::get('/add', [ProductController::class, 'productAdd'])->name('admin.products.add');
         Route::get('/detail', [ProductController::class, 'productDetail'])->name('admin.products.detail');
         Route::get('/edit', [ProductController::class, 'productEdit'])->name('admin.products.edit');
-
-    }); 
+    });
     // user
-    Route::group(['prefix' => 'user'], function() {
-        Route::get('/list', [UserController::class, 'userList'])->name('admin.user.list'); 
-        Route::get('/add', [UserController::class, 'userAdd'])->name('admin.users.add'); 
-        Route::get('/detail', [UserController::class, 'userDetail'])->name('admin.users.detail'); 
-        Route::post('/create', [UserController::class, 'create']); 
-    }); 
+    Route::group(['prefix' => 'user'], function () {
+        Route::get('/list', [UserController::class, 'userList'])->name('admin.user.list');
+        Route::get('/add', [UserController::class, 'userAdd'])->name('admin.users.add');
+        Route::get('/detail/{id}', [UserController::class, 'userDetail'])->name('admin.users.detail');
+        Route::post('/create', [UserController::class, 'create']);
+        Route::get('/edit/{id}', [UserController::class, 'userEdit'])->name('admin.user.update'); 
+        Route::post('/update/{id}', [UserController::class, 'create'])->name('admin.user.up'); 
+    });
     // order
-    Route::group(['prefix' => 'order'], function() {
+    Route::group(['prefix' => 'order'], function () {
         Route::get('/list', [OrderController::class, 'orderList'])->name('admin.order.list');
         Route::get('/detail/{id}', [OrderController::class, 'orderDetail'])->name('admin.order.detail');
         Route::put('/admin/orders/{id}/update-status', [OrderController::class, 'updateStatus'])->name('admin.order.updateStatus');
     });
-
-
 });
 //404
 Route::fallback(function () {

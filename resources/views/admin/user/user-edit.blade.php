@@ -1,95 +1,67 @@
 @extends('admin.master')
-@section('title', 'User Edit')
-@section('head', 'User Edit')
-@section('description', 'Edit user details, update status, and manage user information in the Mediopshopping admin panel.')
+@section('title', 'Edit User')
+@section('head','Chỉnh sửa thông tin người dùng')
+@section('description','Cập nhật thông tin người dùng trong hệ thống.')
+
 @section('body')
-    <div class="single-product-tab-area mg-b-30">
-        <!-- Single pro tab review Start-->
-        <div class="single-pro-review-area">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="review-tab-pro-inner">
-                            <ul id="myTab3" class="tab-review-design">
-                                <li class="active"><a href="#description"><i class="icon nalika-edit" aria-hidden="true"></i>
-                                        User Edit</a></li>
-                                <li><a href="#reviews"><i class="icon nalika-picture" aria-hidden="true"></i> Pictures</a>
-                                </li>
-                            </ul>
-                            <div id="myTabContent" class="tab-content custom-product-edit">
-                                <div class="product-tab-list tab-pane fade active in" id="description">
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                            <div class="review-content-section">
-                                                <div class="input-group mg-b-pro-edt">
-                                                    <span class="input-group-addon"><i class="icon nalika-user"
-                                                            aria-hidden="true"></i></span>
-                                                    <input type="text" class="form-control" placeholder="First Name">
-                                                </div>
-                                                <div class="input-group mg-b-pro-edt">
-                                                    <span class="input-group-addon"><i class="icon nalika-edit"
-                                                            aria-hidden="true"></i></span>
-                                                    <input type="text" class="form-control" placeholder="Last Name">
-                                                </div>
-                                                <div class="input-group mg-b-pro-edt">
-                                                    <span class="input-group-addon"><i class="fa fa-usd"
-                                                            aria-hidden="true"></i></span>
-                                                    <input type="text" class="form-control" placeholder="Email">
-                                                </div>
-                                                <div class="input-group mg-b-pro-edt">
-                                                    <span class="input-group-addon"><i class="icon nalika-new-file"
-                                                            aria-hidden="true"></i></span>
-                                                    <input type="text" class="form-control" placeholder="Role">
-                                                </div>
-                                                <div class="input-group mg-b-pro-edt">
-                                                    <span class="input-group-addon"><i class="icon nalika-favorites"
-                                                            aria-hidden="true"></i></span>
-                                                    <input type="text" class="form-control" placeholder="Status">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                            <div class="review-content-section">
-                                                <div class="input-group mg-b-pro-edt">
-                                                    <span class="input-group-addon"><i class="icon nalika-user"
-                                                            aria-hidden="true"></i></span>
-                                                    <input type="text" class="form-control" placeholder="First Name">
-                                                </div>
-                                                <div class="input-group mg-b-pro-edt">
-                                                    <span class="input-group-addon"><i class="icon nalika-favorites-button"
-                                                            aria-hidden="true"></i></span>
-                                                    <input type="text" class="form-control"
-                                                        placeholder="Last Name">
-                                                </div>
-                                                <div class="input-group mg-b-pro-edt">
-                                                    <span class="input-group-addon"><i class="fa fa-usd"
-                                                            aria-hidden="true"></i></span>
-                                                    <input type="text" class="form-control" placeholder="Sale Price">
-                                                </div>
-                                                <div class="input-group mg-b-pro-edt">
-                                                    <span class="input-group-addon"><i class="icon nalika-like"
-                                                            aria-hidden="true"></i></span>
-                                                    <input type="text" class="form-control" placeholder="Category">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                            <div class="text-center custom-pro-edt-ds">
-                                                <button type="button"
-                                                    class="btn btn-ctl-bt waves-effect waves-light m-r-10">Save
-                                                </button>
-                                                <button type="button"
-                                                    class="btn btn-ctl-bt waves-effect waves-light">Discard
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+<div class="product-status mg-b-30">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="product-status-wrap">
+                    <h4 style="color: white;">Chỉnh sửa người dùng: {{ $user->username }}</h4>
+
+                    {{-- Hiển thị lỗi validate --}}
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul> @foreach ($errors->all() as $error) <li>{{ $error }}</li> @endforeach </ul>
                     </div>
+                    @endif
+
+                    {{-- Form cập nhật --}}
+                    <form action="{{ route('admin.user.update', $user->id) }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT') {{-- Bắt buộc để nhận diện phương thức update --}}
+
+                        <div class="form-group">
+                            <label style="color: white;">Tên đăng nhập</label>
+                            <input type="text" name="username" class="form-control" value="{{ old('username', $user->username) }}" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label style="color: white;">Email</label>
+                            <input type="email" name="email" class="form-control" value="{{ old('email', $user->email) }}" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label style="color: white;">Số điện thoại</label>
+                            <input type="text" name="phonenumber" class="form-control" value="{{ old('phonenumber', $user->phonenumber) }}" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label style="color: white;">Vai trò</label>
+                            <select name="roleId" class="form-control" required>
+                                @foreach($roles as $role)
+                                    <option value="{{ $role->id }}" {{ (old('roleId', $user->roleId) == $role->id) ? 'selected' : '' }}>
+                                        {{ $role->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label style="color: white;">Ảnh đại diện hiện tại</label>
+                            <div>
+                                <img src="{{ asset('storage/'.$user->avatar) }}" width="100" alt="Avatar">
+                            </div>
+                            <input type="file" name="avatar" class="form-control" style="margin-top:10px;">
+                        </div>
+
+                        <div class="form-group" style="margin-top: 20px;">
+                            <button type="submit" class="btn btn-primary">Cập nhật</button>
+                            <a href="{{ route('admin.user.list') }}" class="btn btn-warning">Hủy bỏ</a>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

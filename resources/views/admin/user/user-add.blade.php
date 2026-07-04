@@ -10,21 +10,27 @@
                 <div class="product-status-wrap">
                     {{-- Đổi màu tiêu đề thành trắng --}}
                     <h4 style="color: white;">Thêm người dùng mới</h4>
-                    
+
                     {{-- Hiển thị thông báo lỗi Validate nếu có --}}
                     @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
+
+                    @if (session('success'))
+                    <div class="alert alert-success alert-dismissible" role="alert">
+                        {{ session('success') }}
+                    </div>
                     @endif
 
                     <form action="admin/user/create" method="POST" enctype="multipart/form-data">
-                        @csrf 
-                        
+                        @csrf
+
                         <div class="form-group">
                             <label for="username" style="color: white;">Tên đăng nhập (Username) <span class="text-danger">*</span></label>
                             <input type="text" name="username" id="username" class="form-control" placeholder="Nhập tên đăng nhập..." value="{{ old('username') }}" required maxlength="40">
@@ -50,11 +56,11 @@
                             <select name="roleId" id="roleId" class="form-control" required>
                                 <option value="">--- Chọn vai trò ---</option>
                                 @if(isset($roles))
-                                    @foreach($roles as $role)
-                                        <option value="{{ $role->id }}" {{ old('roleId') == $role->id ? 'selected' : '' }}>
-                                            {{ $role->name }}
-                                        </option>
-                                    @endforeach
+                                @foreach($roles as $role)
+                                <option value="{{ $role->id }}" {{ old('roleId') == $role->id ? 'selected' : '' }}>
+                                    {{ $role->name }}
+                                </option>
+                                @endforeach
                                 @endif
                             </select>
                         </div>
