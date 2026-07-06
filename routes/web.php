@@ -58,6 +58,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin.role']], func
         Route::get('/detail/{id}', [OrderController::class, 'orderDetail'])->name('admin.order.detail');
         Route::put('/admin/orders/{id}/update-status', [OrderController::class, 'updateStatus'])->name('admin.order.updateStatus');
     });
+    
 });
 //404
 Route::fallback(function () {

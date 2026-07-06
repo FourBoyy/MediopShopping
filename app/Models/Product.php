@@ -10,7 +10,7 @@ class Product extends Model
     use HasFactory;
     // 1 product thì thuộc 1 category 
     public function category() {
-        return $this->belongsTo(Category::class, 'categoryid'); 
+        return $this->belongsTo(Category::class, 'categoryId'); 
     }
 
     // 1 product thuộc về nhiều order_detail
