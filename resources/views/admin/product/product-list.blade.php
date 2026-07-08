@@ -23,102 +23,47 @@
                                     <th>Price</th>
                                     <th>Setting</th>
                                 </tr>
+                                @foreach ($products as $product)
                                 <tr>
-                                    <td><img src="img/new-product/5-small.jpg" alt="" /></td>
-                                    <td>Product Title 1</td>
                                     <td>
-                                        <button class="pd-setting">Active</button>
+                                        @php($firstImage = $product->images->first())
+                                        <img src="{{ $firstImage ? $firstImage->imgLink : 'img/new-product/5-small.jpg' }}" alt="" />
                                     </td>
-                                    <td>50</td>
-                                    <td>$750</td>
-                                    <td>Out Of Stock</td>
-                                    <td>$15</td>
+                                    <td>{{ $product->name }}</td>
                                     <td>
-                                        <button data-toggle="tooltip" title="View" class="pd-setting-ed"><i class="fa fa-eye" aria-hidden="true"></i></button>
-                                        <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                                        <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                        @if ((int) $product->stock <= 0)
+                                            <button class="ds-setting">Disabled</button>
+                                        @elseif ((int) $product->stock <= 25)
+                                            <button class="ps-setting">Paused</button>
+                                        @else
+                                            <button class="pd-setting">Active</button>
+                                        @endif
+                                    </td>
+                                    <td>0</td>
+                                    <td>{{ $product->price }}</td>
+                                    <td>
+                                        @if ((int) $product->stock <= 0)
+                                            Out Of Stock
+                                        @elseif ((int) $product->stock <= 25)
+                                            Low Stock
+                                        @else
+                                            In Stock
+                                        @endif
+                                    </td>
+                                    <td>{{ $product->price }}</td>
+                                    <td>
+                                        <a data-toggle="tooltip" title="View" class="pd-setting-ed" href="{{ route('admin.products.detail', $product->id) }}"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                        <a data-toggle="tooltip" title="Edit" class="pd-setting-ed" href="{{ route('admin.products.edit', $product->id) }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                        <form method="POST" action="{{ route('admin.products.delete', $product->id) }}" style="display:inline-block" onsubmit="return confirm('Are you sure delete this product?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button data-toggle="tooltip" title="Trash" class="pd-setting-ed" type="submit">
+                                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td><img src="img/new-product/6-small.jpg" alt="" /></td>
-                                    <td>Product Title 2</td>
-                                    <td>
-                                        <button class="ps-setting">Paused</button>
-                                    </td>
-                                    <td>60</td>
-                                    <td>$1020</td>
-                                    <td>In Stock</td>
-                                    <td>$17</td>
-                                    <td>
-                                        <button data-toggle="tooltip" title="View" class="pd-setting-ed"><i class="fa fa-eye" aria-hidden="true"></i></button>
-                                        <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                                        <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><img src="img/new-product/7-small.jpg" alt="" /></td>
-                                    <td>Product Title 3</td>
-                                    <td>
-                                        <button class="ds-setting">Disabled</button>
-                                    </td>
-                                    <td>70</td>
-                                    <td>$1050</td>
-                                    <td>Low Stock</td>
-                                    <td>$15</td>
-                                    <td>
-                                        <button data-toggle="tooltip" title="View" class="pd-setting-ed"><i class="fa fa-eye" aria-hidden="true"></i></button>
-                                        <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                                        <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><img src="img/new-product/5-small.jpg" alt="" /></td>
-                                    <td>Product Title 4</td>
-                                    <td>
-                                        <button class="pd-setting">Active</button>
-                                    </td>
-                                    <td>120</td>
-                                    <td>$1440</td>
-                                    <td>In Stock</td>
-                                    <td>$12</td>
-                                    <td>
-                                        <button data-toggle="tooltip" title="View" class="pd-setting-ed"><i class="fa fa-eye" aria-hidden="true"></i></button>
-                                        <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                                        <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><img src="img/new-product/6-small.jpg" alt="" /></td>
-                                    <td>Product Title 5</td>
-                                    <td>
-                                        <button class="pd-setting">Active</button>
-                                    </td>
-                                    <td>30</td>
-                                    <td>$540</td>
-                                    <td>Out Of Stock</td>
-                                    <td>$18</td>
-                                    <td>
-                                        <button data-toggle="tooltip" title="View" class="pd-setting-ed"><i class="fa fa-eye" aria-hidden="true"></i></button>
-                                        <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                                        <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><img src="img/new-product/7-small.jpg" alt="" /></td>
-                                    <td>Product Title 6</td>
-                                    <td>
-                                        <button class="ps-setting">Paused</button>
-                                    </td>
-                                    <td>400</td>
-                                    <td>$4000</td>
-                                    <td>In Stock</td>
-                                    <td>$10</td>
-                                    <td>
-                                        <button data-toggle="tooltip" title="View" class="pd-setting-ed"><i class="fa fa-eye" aria-hidden="true"></i></button>
-                                        <button data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                                        <button data-toggle="tooltip" title="Trash" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                                    </td>
-                                </tr>
+                                @endforeach
                             </table>
                             <div class="custom-pagination">
 								<ul class="pagination">
