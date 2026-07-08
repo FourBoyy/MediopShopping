@@ -40,8 +40,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin.role']], func
     Route::group(['prefix' => 'products'], function () {
         Route::get('/list', [ProductController::class, 'productList'])->name('admin.products.list');
         Route::get('/add', [ProductController::class, 'productAdd'])->name('admin.products.add');
-        Route::get('/detail', [ProductController::class, 'productDetail'])->name('admin.products.detail');
-        Route::get('/edit', [ProductController::class, 'productEdit'])->name('admin.products.edit');
+
+        Route::post('/create', [ProductController::class, 'productCreate'])->name('admin.products.create');
+
+        Route::get('/detail/{id}', [ProductController::class, 'productDetail'])->name('admin.products.detail');
+        Route::get('/edit/{id}', [ProductController::class, 'productEdit'])->name('admin.products.edit');
+        Route::put('/update/{id}', [ProductController::class, 'productUpdate'])->name('admin.products.update');
+        Route::delete('/delete/{id}', [ProductController::class, 'productDelete'])->name('admin.products.delete');
     });
     // user
     Route::group(['prefix' => 'user'], function () {

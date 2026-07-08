@@ -8,10 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
-    // 1 product thì thuộc 1 category 
+
+    protected $fillable = [
+        'name',
+        'price',
+        'stock',
+        'categoryId',
+    ];
+
+    // 1 product thì thuộc 1 category
     public function category() {
-        return $this->belongsTo(Category::class, 'categoryId'); 
+        return $this->belongsTo(Category::class, 'categoryId');
     }
+
 
     // 1 product thuộc về nhiều order_detail
 
@@ -26,6 +35,11 @@ class Product extends Model
 
     // 1 product có nhiều review 
     public function reviews() {
-        return $this->hasMany(Review::class, 'productId'); 
+        return $this->hasMany(Review::class, 'productId');
+    }
+
+    // 1 product có nhiều ảnh
+    public function images() {
+        return $this->hasMany(Image::class, 'productId');
     }
 }
